@@ -34,13 +34,33 @@ public class ResponseHandler {
             stopChat(chatId);
         }
 
+//        switch (chatStates.get(chatId)) {
+//            case AWAITING_NAME -> replyToName(chatId, message);
+//            case FOOD_DRINK_SELECTION -> replyToFoodDrinkSelection(chatId, message);
+//            case PIZZA_TOPPINGS -> replyToPizzaToppings(chatId, message);
+//            case AWAITING_CONFIRMATION -> replyToOrder(chatId, message);
+//            default -> unexpectedMessage(chatId);
+//        }
+//        上面的寫法只有JDK14+才能用
+
         switch (chatStates.get(chatId)) {
-            case AWAITING_NAME -> replyToName(chatId, message);
-            case FOOD_DRINK_SELECTION -> replyToFoodDrinkSelection(chatId, message);
-            case PIZZA_TOPPINGS -> replyToPizzaToppings(chatId, message);
-            case AWAITING_CONFIRMATION -> replyToOrder(chatId, message);
-            default -> unexpectedMessage(chatId);
+            case AWAITING_NAME:
+                replyToName(chatId, message);
+                break;
+            case FOOD_DRINK_SELECTION:
+                replyToFoodDrinkSelection(chatId, message);
+                break;
+            case PIZZA_TOPPINGS:
+                replyToPizzaToppings(chatId, message);
+                break;
+            case AWAITING_CONFIRMATION:
+                replyToOrder(chatId, message);
+                break;
+            default:
+                unexpectedMessage(chatId);
+                break;
         }
+
     }
 
     private void unexpectedMessage(long chatId) {
@@ -77,10 +97,10 @@ public class ResponseHandler {
     }
 
     private void replyToPizzaToppings(long chatId, Message message) {
-        if ("瑪格麗塔".equalsIgnoreCase(message.getText())) {
+        if ("margherita".equalsIgnoreCase(message.getText())) {
             promptWithKeyboardForState(chatId, "You selected Margherita Pizza.\nWe will deliver it soon. Thank you!\nOrder again?",
                     KeyboardFactory.getYesOrNo(), AWAITING_CONFIRMATION);
-        } else if ("義大利辣腸".equalsIgnoreCase(message.getText())) {
+        } else if ("pepperoni".equalsIgnoreCase(message.getText())) {
             promptWithKeyboardForState(chatId, "We finished the Pepperoni Pizza.\nSelect another Topping",
                     KeyboardFactory.getPizzaToppingsKeyboard(), PIZZA_TOPPINGS);
         } else {

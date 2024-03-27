@@ -21,7 +21,7 @@ public class PizzaBot extends AbilityBot {
     private final ResponseHandler responseHandler;
     @Autowired
     public PizzaBot(Environment env) {
-        super(env.getProperty("BOT_TOKEN"), "jyint_bot");
+        super(env.getProperty("BOT_TOKEN"), "jyint_bot");// 抓取application.properties中的BOT_TOKEN
         responseHandler = new ResponseHandler(silent, db);
     }
     public Ability startBot() {

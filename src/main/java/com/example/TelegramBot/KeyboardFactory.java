@@ -9,15 +9,15 @@ import java.util.List;
 public class KeyboardFactory {
     public static ReplyKeyboard getPizzaToppingsKeyboard() {
         KeyboardRow row = new KeyboardRow();
-        row.add("瑪格麗塔");
-        row.add("義大利辣腸");
+        row.add("Margherita");
+        row.add("Pepperoni");
         return new ReplyKeyboardMarkup(List.of(row));
     }
 
     public static ReplyKeyboard getPizzaOrDrinkKeyboard(){
         KeyboardRow row = new KeyboardRow();
         row.add("Pizza");
-        row.add("飲料");
+        row.add("Drink");
         return new ReplyKeyboardMarkup(List.of(row));
     }
 
